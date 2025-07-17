@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DORAEMON-AI Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+    <style>
+        *, ::before, ::after {
+            --tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style:
+        }
+        ::backdrop{
+            --tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style:
+        }
+        *,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.mr-2{margin-right:0.5rem}.mt-4{margin-top:1rem}.hidden{display:none}.text-center{text-align:center}
+
+        :root {
+            --primary: #E0FFFF;
+            --primary-light: #F0FFFF;
+            --primary-dark: #00CED1;
+            --secondary: #00CED1;
+            --white: #FFFFFF;
+            --light-bg: #F8FAFA;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'El Messiri', sans-serif;
+            background: linear-gradient(135deg, var(--light-bg), var(--white));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            color: var(--text-dark);
+        }
+
+        .header-section {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 400px;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+
+        .header-section.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .lottie-animation-container { 
+            width: 100%;
+            height: auto;
+            max-width: 300px; 
+            max-height: 300px; 
+            margin: 0 auto; 
+        }
+
+        .login-container {
+            background: var(--white);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 206, 209, 0.15);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid var(--primary-light);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .login-container.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .login-container:hover {
+            box-shadow: 0 12px 25px rgba(0, 206, 209, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 8px 15px rgba(0, 206, 209, 0.2);
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 206, 209, 0.3);
+        }
+
+        .title {
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.7rem;
+            margin-top: 0.8rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.2rem;
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 18px 12px 45px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-light);
+            background-color: var(--white);
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 3px rgba(0, 206, 209, 0.15);
+        }
+
+        .input-field:focus + .input-icon {
+            transform: translateY(-50%) scale(1.1);
+            color: var(--secondary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 206, 209, 0.3);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .copy-btn, .dev-btn {
+            background: var(--primary-light);
+            border: none;
+            color: var(--primary-dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+            transform: translateY(20px);
+            opacity: 0;
+            box-shadow: 0 3px 10px rgba(0, 206, 209, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-btn:hover, .dev-btn:hover {
+            background: var(--primary-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.2);
+        }
+
+        .copy-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            left: -100%;
+            top: 0;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn.copied .copy-animation {
+            left: 0;
+        }
+
+        .error-message {
+            color: #D32F2F;
+            text-align: center;
+            margin-top: 0.8rem;
+            font-weight: 500;
+            transform: scale(0.95);
+            opacity: 0;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: rgba(211, 47, 47, 0.05);
+            border-left: 3px solid #D32F2F;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+            box-shadow: 0 3px 10px rgba(0, 206, 209, 0.2);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 206, 209, 0.3);
+        }
+
+        .floating-element {
+            position: absolute;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(1px);
+            opacity: 0.5;
+        }
+
+        .star {
+            position: absolute;
+            background-color: var(--white);
+            border-radius: 50%;
+            z-index: 1;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-dark);
+            opacity: 0;
+            z-index: 10;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .input-field {
+                padding: 10px 15px 10px 40px;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn, .copy-btn, .dev-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .lottie-animation-container {
+                max-width: 300px;
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-element" style="width: 150px; height: 150px; top: 15%; left: 10%; background: radial-gradient(circle, var(--primary-light), transparent 70%);"></div>
+    <div class="floating-element" style="width: 100px; height: 100px; bottom: 20%; right: 12%; background: radial-gradient(circle, var(--primary-light), transparent 70%);"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; top: 35%; right: 18%; background: radial-gradient(circle, var(--primary-light), transparent 70%);"></div>
+    <div class="floating-element" style="width: 120px; height: 120px; bottom: 30%; left: 15%; background: radial-gradient(circle, var(--primary-light), transparent 70%);"></div>
+
+    <div id="stars-container">
+        <div class="star" style="width: 1.85115px; height: 1.85115px; left: 52.8485%; top: 10.0584%; --duration: 5.228358895343376s; animation-delay: 2.71864s;"></div>
+        <div class="star" style="width: 2.18298px; height: 2.18298px; left: 66.6154%; top: 86.6889%; --duration: 2.11093637438016s; animation-delay: 3.72667s;"></div>
+        <div class="star" style="width: 2.23863px; height: 2.23863px; left: 58.861%; top: 20.2202%; --duration: 5.664202362171455s; animation-delay: 1.81417s;"></div>
+        <div class="star" style="width: 1.51619px; height: 1.51619px; left: 63.4249%; top: 63.3997%; --duration: 3.299516832869277s; animation-delay: 0.49805s;"></div>
+        <div class="star" style="width: 1.02041px; height: 1.02041px; left: 41.4552%; top: 41.0601%; --duration: 4.519092861605776s; animation-delay: 3.37473s;"></div>
+        <div class="star" style="width: 2.57844px; height: 2.57844px; left: 92.8365%; top: 60.4317%; --duration: 3.2360702604503278s; animation-delay: 0.736197s;"></div>
+        <div class="star" style="width: 2.2492px; height: 2.2492px; left: 91.7923%; top: 59.049%; --duration: 2.703495176163503s; animation-delay: 0.22247s;"></div>
+        <div class="star" style="width: 2.92994px; height: 2.92994px; left: 23.0171%; top: 83.3834%; --duration: 2.4703397480831675s; animation-delay: 2.30294s;"></div>
+        <div class="star" style="width: 2.17059px; height: 2.17059px; left: 86.682%; top: 7.15748%; --duration: 2.717367117034402s; animation-delay: 3.20414s;"></div>
+        <div class="star" style="width: 1.07155px; height: 1.07155px; left: 88.6471%; top: 2.99863%; --duration: 5.581597805914077s; animation-delay: 3.83394s;"></div>
+        <div class="star" style="width: 1.80714px; height: 1.80714px; left: 79.0114%; top: 91.903%; --duration: 2.041024751272026s; animation-delay: 3.7752s;"></div>
+        <div class="star" style="width: 1.11777px; height: 1.11777px; left: 24.2286%; top: 34.0362%; --duration: 5.797409821647278s; animation-delay: 0.265494s;"></div>
+        <div class="star" style="width: 2.56429px; height: 2.56429px; left: 35.9354%; top: 71.9389%; --duration: 4.588009011866123s; animation-delay: 2.78938s;"></div>
+        <div class="star" style="width: 2.83615px; height: 2.83615px; left: 9.70968%; top: 18.7576%; --duration: 2.456954579575013s; animation-delay: 2.96914s;"></div>
+        <div class="star" style="width: 2.34595px; height: 2.34595px; left: 14.6639%; top: 22.3542%; --duration: 4.2977402503457895s; animation-delay: 0.166781s;"></div>
+        <div class="star" style="width: 2.95334px; height: 2.95334px; left: 55.3997%; top: 5.97253%; --duration: 2.6257417995144596s; animation-delay: 1.96639s;"></div>
+        <div class="star" style="width: 1.70532px; height: 1.70532px; left: 0.101425%; top: 84.5919%; --duration: 5.546619046886901s; animation-delay: 0.497242s;"></div>
+        <div class="star" style="width: 2.06489px; height: 2.06489px; left: 24.9691%; top: 23.0401%; --duration: 5.434587416705069s; animation-delay: 0.44413s;"></div>
+        <div class="star" style="width: 2.75521px; height: 2.75521px; left: 31.1165%; top: 60.2457%; --duration: 5.994135934956964s; animation-delay: 2.42975s;"></div>
+        <div class="star" style="width: 1.08426px; height: 1.08426px; left: 21.2776%; top: 13.3115%; --duration: 2.600958917505669s; animation-delay: 3.41449s;"></div>
+        <div class="star" style="width: 1.1596px; height: 1.1596px; left: 98.0169%; top: 62.3324%; --duration: 5.861743722755284s; animation-delay: 3.59149s;"></div>
+        <div class="star" style="width: 2.55127px; height: 2.55127px; left: 14.1624%; top: 15.7212%; --duration: 2.0297742143280773s; animation-delay: 2.33147s;"></div>
+        <div class="star" style="width: 2.04519px; height: 2.04519px; left: 53.7947%; top: 10.047%; --duration: 2.826697656698011s; animation-delay: 1.01284s;"></div>
+        <div class="star" style="width: 2.51809px; height: 2.51809px; left: 37.8415%; top: 39.634%; --duration: 4.318970474904564s; animation-delay: 3.1993s;"></div>
+        <div class="star" style="width: 1.70628px; height: 1.70628px; left: 97.1072%; top: 76.8997%; --duration: 3.0805160876182907s; animation-delay: 2.83887s;"></div>
+        <div class="star" style="width: 2.49693px; height: 2.49693px; left: 56.9402%; top: 90.4266%; --duration: 4.921888257796364s; animation-delay: 2.939s;"></div>
+        <div class="star" style="width: 1.693px; height: 1.693px; left: 87.5591%; top: 2.84863%; --duration: 5.951451829698412s; animation-delay: 1.94208s;"></div>
+        <div class="star" style="width: 1.25936px; height: 1.25936px; left: 58.5777%; top: 96.2907%; --duration: 5.284201475362179s; animation-delay: 3.554s;"></div>
+        <div class="star" style="width: 1.97975px; height: 1.97975px; left: 59.7412%; top: 25.7507%; --duration: 2.7682504210344523s; animation-delay: 0.95466s;"></div>
+        <div class="star" style="width: 1.56309px; height: 1.56309px; left: 71.9294%; top: 46.3106%; --duration: 2.619686083906062s; animation-delay: 0.508791s;"></div>
+        <div class="star" style="width: 2.57222px; height: 2.57222px; left: 97.3489%; top: 61.965%; --duration: 5.220191317612482s; animation-delay: 2.45262s;"></div>
+        <div class="star" style="width: 1.96567px; height: 1.96567px; left: 51.7823%; top: 34.3157%; --duration: 4.907682138249497s; animation-delay: 3.11491s;"></div>
+        <div class="star" style="width: 1.652px; height: 1.652px; left: 56.0007%; top: 50.9119%; --duration: 5.462978274854821s; animation-delay: 1.70105s;"></div>
+        <div class="star" style="width: 2.37725px; height: 2.37725px; left: 6.43042%; top: 80.7602%; --duration: 3.019592105481171s; animation-delay: 3.77129s;"></div>
+        <div class="star" style="width: 1.11989px; height: 1.11989px; left: 71.4185%; top: 93.0672%; --duration: 5.432393795287774s; animation-delay: 2.69276s;"></div>
+        <div class="star" style="width: 1.4547px; height: 1.4547px; left: 71.9044%; top: 29.646%; --duration: 2.0645322647667905s; animation-delay: 0.256981s;"></div>
+        <div class="star" style="width: 1.97234px; height: 1.97234px; left: 39.3342%; top: 85.7172%; --duration: 4.221707437054084s; animation-delay: 0.809508s;"></div>
+        <div class="star" style="width: 1.68564px; height: 1.68564px; left: 76.4905%; top: 91.0601%; --duration: 2.9513550217887077s; animation-delay: 1.01843s;"></div>
+        <div class="star" style="width: 2.57234px; height: 2.57234px; left: 45.5899%; top: 90.057%; --duration: 4.677573310932021s; animation-delay: 1.31086s;"></div>
+        <div class="star" style="width: 2.26339px; height: 2.26339px; left: 40.355%; top: 38.03%; --duration: 3.532619662598783s; animation-delay: 0.999101s;"></div>
+    </div>
+
+    <div id="confetti-container"></div>
+
+    <section class="header-section" id="headerSection">
+        <div id="lottieContainer" class="lottie-animation-container"></div>
+    </section>
+
+    <div class="login-container" id="loginContainer">
+        <div class="logo-container">
+            <img src="https://ik.imagekit.io/7dlwyuejel/IMG_20250429_120600.jpg?updatedAt=1749099878978" alt="DORAEMON-AI Logo" class="logo-img">
+            <h1 class="title">DORAEMON-AI</h1>
+        </div>
+        
+        <input type="hidden" name="device_id" id="deviceIdInput">
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <form id="loginForm">
+            <div class="input-group" id="inputGroup">
+                <i class="fas fa-key input-icon"></i>
+                <input type="text" name="key_value" placeholder="Enter License Key" required class="input-field" id="licenseInput">
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-sign-in-alt mr-2"></i> Login
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <button class="copy-btn" id="copyBtn" onclick="copyDeviceId()">
+                <span class="copy-animation"></span>
+                <i class="fas fa-copy mr-2"></i>
+                <span id="copyText">Copy Device ID</span>
+            </button>
+        </div>
+
+        <div class="social-links" id="socialLinks">
+            <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://t.me/+39ZxXyCIpLVlNmU1" target="_blank" class="social-link" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDrOdUqHtrO61BgVwPCcMVBhaYRgLWRGVQ",
+            authDomain: "dora3monnewproject.firebaseapp.com",
+            projectId: "dora3monnewproject",
+            storageBucket: "dora3monnewproject.firebasestorage.app",
+            messagingSenderId: "559466626820",
+            appId: "1:559466626820:web:b27befd3baec6cf78a9a51",
+            measurementId: "G-JDX9SBLE55"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database(); 
+
+        function generateDeviceId() {
+            const numbers = '123456789';
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let id = '';
+
+            id += numbers.charAt(Math.floor(Math.random() * numbers.length));
+
+            for (let i = 0; i < 5; i++) {
+                id += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            return id;
+        }
+
+        function getDeviceId() {
+            let id = localStorage.getItem("device_id");
+            if (!id || !/^[1-9][A-Z]{5}$/.test(id)) {
+                id = generateDeviceId();
+                localStorage.setItem("device_id", id);
+            }
+            return id;
+        }
+
+        const lottieAnimationData = {
+            "v":"4.10.1","fr":60,"ip":0,"op":80,"w":1080,"h":1080,"nm":"Big_final_loading_comp","ddd":0,"assets":[],"layers":[{"ddd":0,"ind":1,"ty":4,"nm":"B2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0,"y":1},"o":{"x":0,"y":0},"n":"0_1_0_0","t":0,"s":[658.4,657.127,0],"e":[540.031,538.758,0],"to":[-19.7282791137695,-19.7282791137695,0],"ti":[19.7282791137695,19.7282791137695,0]},{"i":{"x":0,"y":0},"o":{"x":0.167,"y":0.167},"n":"0_0_0p167_0p167","t":10,"s":[540.031,538.758,0],"e":[540.031,538.758,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.167,"y":0},"n":"0p667_1_0p167_0","t":70,"s":[540.031,538.758,0],"e":[421.63,657.158,0],"to":[-19.7333698272705,19.7333698272705,0],"ti":[19.7333698272705,-19.7333698272705,0]},{"t":80}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":2,"ty":4,"nm":"B3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[776.835,538.693,0],"e":[776.835,538.693,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":10,"s":[776.835,538.693,0],"e":[658.4,657.127,0],"to":[-19.7390975952148,19.7390975952148,0],"ti":[19.7390975952148,-19.7390975952148,0]},{"t":20}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":3,"ty":4,"nm":"M3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[658.465,420.323,0],"e":[658.465,420.323,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":20,"s":[658.465,420.323,0],"e":[776.835,538.693,0],"to":[19.7282791137695,19.7282791137695,0],"ti":[-19.7282791137695,-19.7282791137695,0]},{"t":30}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":4,"ty":4,"nm":"T3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[539.332,301.19,0],"e":[539.332,301.19,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":30,"s":[539.332,301.19,0],"e":[658.465,420.323,0],"to":[19.8555583953857,19.8555583953857,0],"ti":[-19.8555583953857,-19.8555583953857,0]},{"t":40}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":5,"ty":4,"nm":"T2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[420.897,419.624,0],"e":[420.897,419.624,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":40,"s":[420.897,419.624,0],"e":[539.332,301.19,0],"to":[19.7390975952148,-19.7390975952148,0],"ti":[-19.7390975952148,19.7390975952148,0]},{"t":50}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":6,"ty":4,"nm":"T1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[302.497,538.025,0],"e":[302.497,538.025,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":50,"s":[302.497,538.025,0],"e":[420.897,419.624,0],"to":[19.7333698272705,-19.7333698272705,0],"ti":[-19.7333698272705,19.7333698272705,0]},{"t":60}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0},{"ddd":0,"ind":7,"ty":4,"nm":"M1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":-45,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.667,"y":0.667},"o":{"x":0.333,"y":0.333},"n":"0p667_0p667_0p333_0p333","t":0,"s":[421.63,657.158,0],"e":[421.63,657.158,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.667,"y":1},"o":{"x":0.333,"y":0},"n":"0p667_1_0p333_0","t":60,"s":[421.63,657.158,0],"e":[302.497,538.025,0],"to":[-19.8555583953857,-19.8555583953857,0],"ti":[19.8555583953857,19.8555583953857,0]},{"t":70}],"ix":2},"a":{"a":0,"k":[8,20,0],"ix":1},"s":{"a":0,"k":[17.28,17.28,100],"ix":6}},"ao":0,"ef":[{"ty":21,"nm":"Fill","np":9,"mn":"ADBE Fill","ix":1,"en":1,"ef":[{"ty":10,"nm":"Fill Mask","mn":"ADBE Fill-0001","ix":1,"v":{"a":0,"k":0,"ix":1}},{"ty":7,"nm":"All Masks","mn":"ADBE Fill-0007","ix":2,"v":{"a":0,"k":0,"ix":2}},{"ty":2,"nm":"Color","mn":"ADBE Fill-0002","ix":3,"v":{"a":0,"k":[0,0.7765,1,1],"ix":3}},{"ty":7,"nm":"Invert","mn":"ADBE Fill-0006","ix":4,"v":{"a":0,"k":0,"ix":4}},{"ty":0,"nm":"Horizontal Feather","mn":"ADBE Fill-0003","ix":5,"v":{"a":0,"k":0,"ix":5}},{"ty":0,"nm":"Vertical Feather","mn":"ADBE Fill-0004","ix":6,"v":{"a":0,"k":0,"ix":6}},{"ty":0,"nm":"Opacity","mn":"ADBE Fill-0005","ix":7,"v":{"a":0,"k":1,"ix":7}}]}],"shapes":[{"ty":"gr","it":[{"ty":"rc","d":1,"s":{"a":0,"k":[912,912],"ix":2},"p":{"a":0,"k":[0,0],"ix":3},"r":{"a":0,"k":0,"ix":4},"nm":"Rectangle Path 1","mn":"ADBE Vector Shape - Rect","hd":false},{"ty":"fl","c":{"a":0,"k":[0.1804,0.0118,0.898,1],"ix":4},"o":{"a":0,"k":100,"ix":5},"r":1,"nm":"Fill 1","mn":"ADBE Vector Graphic - Fill","hd":false},{"ty":"tr","p":{"a":0,"k":[8,20],"ix":2},"a":{"a":0,"k":[0,0],"ix":1},"s":{"a":0,"k":[100,100],"ix":3},"r":{"a":0,"k":0,"ix":6},"o":{"a":0,"k":100,"ix":7},"sk":{"a":0,"k":0,"ix":4},"sa":{"a":0,"k":0,"ix":5},"nm":"Transform"}],"nm":"Rectangle 1","np":3,"cix":2,"ix":1,"mn":"ADBE Vector Group","hd":false},{"ty":"rd","nm":"Round Corners 1","r":{"a":0,"k":100,"ix":1},"ix":2,"mn":"ADBE Vector Filter - RC","hd":false}],"ip":0,"op":600,"st":0,"bm":0}]
+        };
+
+        function animateFloatingElements() {
+            document.querySelectorAll('.floating-element').forEach((el, i) => {
+                gsap.to(el, {
+                    y: i % 2 === 0 ? -15 : 15,
+                    x: i % 3 === 0 ? -10 : 10,
+                    rotation: i % 2 === 0 ? 3 : -3,
+                    duration: Math.random() * 3 + 2,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    delay: Math.random() * 2
+                });
+            });
+
+            document.querySelectorAll('.star').forEach(star => {
+                gsap.to(star, {
+                    opacity: 1,
+                    duration: 0.5,
+                    delay: Math.random() * 3
+                });
+            });
+        }
+
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            if (!container) return;
+            container.innerHTML = ''; 
+
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+
+                const size = Math.random() * 8 + 4;
+                const posX = Math.random() * window.innerWidth;
+                const posY = -20;
+                const color = `hsl(${Math.random() * 60 + 270}, 80%, 70%)`;
+                const rotation = Math.random() * 360;
+                const shape = Math.random() > 0.5 ? '50%' : '0';
+
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = `${posX}px`;
+                confetti.style.top = `${posY}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.borderRadius = shape;
+                confetti.style.transform = `rotate(${rotation}deg)`;
+
+                container.appendChild(confetti);
+            }
+        }
+
+        function animateConfetti() {
+            const confetti = document.querySelectorAll('.confetti');
+
+            confetti.forEach((piece, index) => {
+                const duration = Math.random() * 2.5 + 1.5;
+                const delay = index * 0.015;
+
+                gsap.to(piece, {
+                    y: window.innerHeight + 80,
+                    x: `+=${Math.random() * 150 - 75}`,
+                    rotation: `+=${Math.random() * 720 - 360}`,
+                    opacity: 1,
+                    duration: duration,
+                    delay: delay,
+                    ease: 'power1.out',
+                    onComplete: () => {
+                        piece.remove();
+                    }
+                });
+            });
+        }
+
+        async function copyDeviceId() {
+            const deviceId = document.getElementById('deviceIdInput').value;
+            const copyBtn = document.getElementById('copyBtn');
+            const copyText = document.getElementById('copyText');
+
+            if (!navigator.clipboard || !navigator.clipboard.writeText) {
+                console.warn("Clipboard API not available or secure context not detected. Falling back to alert.");
+                alert("Please manually copy your Device ID: " + deviceId);
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(deviceId);
+                createConfetti();
+                animateConfetti();
+
+                copyText.innerHTML = 'Copied!';
+
+                gsap.to(copyBtn, {
+                    scale: 1.08,
+                    duration: 0.15,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: 'power2.inOut',
+                    onComplete: () => {
+                        setTimeout(() => {
+                            copyText.innerHTML = 'Copy Device ID';
+                        }, 1200);
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to copy using clipboard API: ', err);
+                alert('Failed to copy Device ID automatically. Please manually copy: ' + deviceId);
+            }
+        }
+
+        // Function to show error message with animation, after login form appears
+        function showErrorAfterDelay(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+
+            gsap.fromTo(errorDiv,
+                { scale: 0.95, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out' }
+            );
+        }
+
+        function populateLicenseInput() {
+            const licenseInput = document.getElementById('licenseInput');
+            const lastKey = localStorage.getItem('lastKey');
+            if (lastKey) {
+                licenseInput.value = lastKey;
+            }
+        }
+
+        // Modified to accept a callback for error display
+        function showLoginPage(callbackOnError = null) {
+            const loginContainer = document.getElementById('loginContainer');
+            
+            gsap.to('#headerSection', {
+                opacity: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                onComplete: () => {
+                    document.getElementById('headerSection').classList.add('hidden');
+                }
+            });
+
+            gsap.to(loginContainer, {
+                opacity: 1,
+                visibility: 'visible',
+                y: 0, 
+                duration: 0.7,
+                ease: 'power3.out',
+                onComplete: () => {
+                    loginContainer.classList.add('visible');
+                    animateLoginElements();
+                    // Display error message AFTER login form is visible
+                    if (callbackOnError) {
+                        callbackOnError();
+                    }
+                }
+            });
+        }
+    
+        function animateLoginElements() {
+            gsap.to('.logo-container', {
+                scale: 1,
+                opacity: 1,
+                duration: 0.6,
+                delay: 0.15,
+                ease: 'elastic.out(1, 0.6)'
+            });
+
+            gsap.to('#inputGroup', {
+                x: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.3,
+                ease: 'power2.out'
+            });
+
+            gsap.to('#submitBtn', {
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.6,
+                ease: 'power2.out'
+            });
+
+            gsap.to('#copyBtn, .dev-btn', { 
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.75,
+                ease: 'power2.out'
+            });
+
+            gsap.to('#socialLinks', {
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.9,
+                ease: 'power2.out'
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const deviceId = getDeviceId();
+            document.getElementById('deviceIdInput').value = deviceId;
+
+            const anim = lottie.loadAnimation({
+                container: document.getElementById('lottieContainer'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: lottieAnimationData
+            });
+
+            // Check if already logged in first
+            if (localStorage.getItem('loggedIn') === 'true') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            // After lottie animation, show login page.
+            // If there's a pending error, show it after the login page appears.
+            const pendingError = sessionStorage.getItem('loginError');
+            sessionStorage.removeItem('loginError'); // Clear immediately after reading
+
+            setTimeout(() => {
+                showLoginPage(() => {
+                    if (pendingError) {
+                        showErrorAfterDelay(pendingError);
+                    }
+                });
+            }, 3000); // Lottie animation duration
+
+            animateFloatingElements();
+            populateLicenseInput();
+
+            const licenseInput = document.getElementById('licenseInput');
+            if (licenseInput) {
+                licenseInput.addEventListener('focus', () => {
+                    gsap.to('.input-icon', {
+                        scale: 1.1,
+                        color: 'var(--secondary)',
+                        duration: 0.25,
+                        ease: 'back.out'
+                    });
+                });
+
+                licenseInput.addEventListener('blur', () => {
+                    gsap.to('.input-icon', {
+                        scale: 1,
+                        color: 'var(--primary-dark)',
+                        duration: 0.25,
+                        ease: 'back.out'
+                    });
+                });
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const key = document.getElementById('licenseInput').value.trim();
+            const deviceId = getDeviceId();
+            const errorDiv = document.getElementById('errorMessage');
+
+            errorDiv.style.display = 'none'; // Hide any previous error
+
+            if (!key) {
+                // If key is empty, show error directly on current page state
+                showErrorAfterDelay("Please enter an access key");
+                return;
+            }
+
+            try {
+                document.getElementById('submitBtn').innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Validating...';
+
+                const keyRef = db.ref(`accessKeys/${key}`);
+                const snapshot = await keyRef.once('value');
+
+                if (!snapshot.exists()) {
+                    throw new Error("Access key not found");
+                }
+
+                const keyData = snapshot.val();
+                const now = Date.now();
+            
+                if (keyData.expiry && now > keyData.expiry) {
+                    throw new Error("Access key has expired");
+                }
+
+                // Crucial logic change:
+                // If deviceId is already set and it matches the current deviceId, it's a valid login.
+                // If deviceId is NOT set (first time use), assign it.
+                if (keyData.deviceId && keyData.deviceId !== deviceId) {
+                    // Key is tied to a DIFFERENT device
+                    throw new Error("This key is already used on another device");
+                } else {
+                    // Key is either not used OR is used on this device. Update/confirm it.
+                    await keyRef.update({ 
+                        deviceId: deviceId,
+                        lastUsed: now
+                    });
+                }
+
+                localStorage.setItem('lastKey', key);
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('currentLicenseKey', key);
+
+                createConfetti();
+                animateConfetti();
+
+                gsap.to('#loginContainer', {
+                    scale: 1.05,
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: 'power2.in',
+                    onComplete: () => {
+                        window.location.href = 'dashboard.html'; 
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error validating key:", error);
+                // Store error message and reload to show Lottie, then login form, then error.
+                sessionStorage.setItem('loginError', error.message);
+                window.location.reload(); 
+            } finally {        
+                document.getElementById('submitBtn').innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i> Login';
+            }
+        });
+    </script>
+</body>
+</html>
